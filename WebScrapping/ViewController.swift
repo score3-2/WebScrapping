@@ -22,12 +22,12 @@ class ViewController: UIViewController {
         
         scrapeURL()
     }
-
+    
     /* 2 Create a func to scrapp the constant url (string version of the url).
      request property to request and hold the url.
      then we tell the method to print on a string if there is any response
      */
- 
+    
     func scrapeURL() {
         Alamofire.request(urlName).responseString { response in
             if response.result.isSuccess {
@@ -40,8 +40,17 @@ class ViewController: UIViewController {
     
     // 3 Parse the html
     func parseHTML(html: String) {
-        print(html)
+        
+        do {
+            let doc = try Kanna.HTML(html: html, encoding: String.Encoding.utf8)
+            print(doc)
+            print(doc.title)
+            print(doc.head)
+            print(doc.body)
+        } catch {
+            print(error)
+        }
     }
-
+    
 }
 
