@@ -13,7 +13,7 @@ import Kanna
 class ViewController: UIViewController {
     
     // 1 Create a constant to hold the web url
-    let urlName = "https://colorhunt.co/palette/117534"
+    let urlName = "https://www.apple.com/itunes/charts/songs/"
     
     // MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -23,16 +23,24 @@ class ViewController: UIViewController {
         scrapeURL()
     }
 
-    /* 1 Create a func to scrapp the constant url (string version of the url).
+    /* 2 Create a func to scrapp the constant url (string version of the url).
      request property to request and hold the url.
      then we tell the method to print on a string if there is any response
      */
  
     func scrapeURL() {
         Alamofire.request(urlName).responseString { response in
-            print(response.result.isSuccess)
-            print(response.result.value)
+            if response.result.isSuccess {
+                if let htmlString = response.result.value {
+                    self.parseHTML(html: htmlString)
+                }
+            }
         }
+    }
+    
+    // 3 Parse the html
+    func parseHTML(html: String) {
+        print(html)
     }
 
 }
