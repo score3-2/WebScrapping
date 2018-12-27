@@ -47,6 +47,16 @@ class ViewController: UIViewController {
             print(doc.title)
             print(doc.head)
             print(doc.body)
+            for div in doc.css("div") {
+                if div["class"] == "section-content"{
+                    for ul in div.css("ul") {
+                        for li in ul.css("li") {
+                            print(li.text)
+                        }
+                    }
+                }
+            }
+            
         } catch {
             print(error)
         }
